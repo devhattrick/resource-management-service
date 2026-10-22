@@ -14,6 +14,12 @@ public final class SecurityUtils {
     private SecurityUtils() {
     }
 
+    public static boolean hasAuthority(String authority) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth != null && auth.getAuthorities().stream()
+                .anyMatch(granted -> granted.getAuthority().equals(authority));
+    }
+
     public static UUID currentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getPrincipal() instanceof Jwt jwt) {

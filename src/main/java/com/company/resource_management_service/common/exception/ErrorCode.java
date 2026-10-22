@@ -9,6 +9,7 @@ public enum ErrorCode {
     VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "Validation failed"),
     BUSINESS_RULE_VIOLATION(HttpStatus.UNPROCESSABLE_ENTITY, "Business rule violated"),
     DUPLICATE_RESOURCE(HttpStatus.CONFLICT, "Resource already exists"),
+    DATA_INTEGRITY(HttpStatus.CONFLICT, "Operation violates a data constraint"),
     CONCURRENT_UPDATE(HttpStatus.CONFLICT, "Resource was modified by another transaction"),
     ACCESS_DENIED(HttpStatus.FORBIDDEN, "Access denied"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Unauthorized"),

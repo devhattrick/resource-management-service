@@ -2,6 +2,7 @@ package com.company.resource_management_service.common.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.access.AccessDeniedException;
@@ -46,9 +47,14 @@ public class GlobalExceptionHandler {
         return pd;
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ProblemDetail handleUnreadable(HttpMessageNotReadableException ex) {
+        return problem(ErrorCode.VALIDATION_ERROR, "Malformed or invalid request body");
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ProblemDetail handleDataIntegrity(DataIntegrityViolationException ex) {
-        return problem(ErrorCode.DUPLICATE_RESOURCE, ErrorCode.DUPLICATE_RESOURCE.defaultMessage());
+        return problem(ErrorCode.DATA_INTEGRITY, ErrorCode.DATA_INTEGRITY.defaultMessage());
     }
 
     @ExceptionHandler(OptimisticLockingFailureException.class)

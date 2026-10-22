@@ -1,6 +1,5 @@
 package com.company.resource_management_service.common.service;
 
-import com.company.resource_management_service.common.entity.BaseEntity;
 import com.company.resource_management_service.common.exception.ResourceNotFoundException;
 import com.company.resource_management_service.common.mapper.EntityMapper;
 import com.company.resource_management_service.common.web.PageResponse;
@@ -15,7 +14,7 @@ import java.util.UUID;
  * Feature services extend this and supply a repository + mapper;
  * only non-trivial business logic is overridden.
  */
-public abstract class BaseCrudService<E extends BaseEntity, REQ, RES> {
+public abstract class BaseCrudService<E, REQ, RES> {
 
     protected final JpaRepository<E, UUID> repository;
     protected final EntityMapper<E, REQ, RES> mapper;
