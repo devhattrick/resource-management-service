@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: resource-management-service
+  profiles:
+    default: local
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/resource_mgmt}
+    username: ${DB_USER:rmdev}
+    password: ${DB_PASSWORD:rmdev}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+app:
+  security:
+    jwt:
+      secret: ${APP_JWT_SECRET:dev-only-secret-change-me-please-min-32-bytes-123456}
+      validity-seconds: ${APP_JWT_VALIDITY:3600}

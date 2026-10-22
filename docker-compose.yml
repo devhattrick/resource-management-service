@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: rm-postgres
+    environment:
+      POSTGRES_DB: resource_mgmt
+      POSTGRES_USER: rmdev
+      POSTGRES_PASSWORD: rmdev
+    ports:
+      - "5432:5432"
+    volumes:
+      - rm_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rmdev -d resource_mgmt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rm_pgdata:
